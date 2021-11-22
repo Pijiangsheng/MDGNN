@@ -37,7 +37,7 @@ for etype in g.etypes:
 
 
 
-model =(5,100, 100,('drug', 'treat', 'micor')).to(args.device)
+model =Model(5,100, 100,('drug', 'treat', 'micor')).to(args.device)
 opt = torch.optim.Adam(model.parameters(),lr =args.lr)
 BCEloss = nn.BCELoss()
 
