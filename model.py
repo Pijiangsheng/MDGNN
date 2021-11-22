@@ -77,8 +77,7 @@ class Block(nn.Module):
         h2 = torch.cat([h2[u],h2[v]],dim=0)
         h3 = torch.cat([h3[u],h3[v]],dim=0)
         
-        #node_score = torch.matmul(self.activate(self.linear1(h1)),self.activate(self.linear2(h2)).t())
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            node_score = torch.matmul(h1,h2.t())
+        node_score = torch.matmul(self.activate(self.linear1(h1)),self.activate(self.linear2(h2)).t())
         node_score = F.softmax(node_score,dim=1)
         h = h3+self.activate(self.linear5(torch.matmul(node_score,h3)))
         
@@ -92,7 +91,7 @@ class Block(nn.Module):
         h4 = torch.cat([h4[u],h4[v]],dim=0)
         h5 = torch.cat([h5[u],h5[v]],dim=0)
         h6 = torch.cat([h6[u],h6[v]],dim=0)
-        #feature_score = torch.matmul(self.activate(self.linear3(h4)).t(),self.activate(self.linear4(h5)))
+        feature_score = torch.matmul(self.activate(self.linear3(h4)).t(),self.activate(self.linear4(h5)))
         feature_score = torch.matmul(h4.t(),h5)
     
         feature_score = F.softmax(feature_score,dim=0)
